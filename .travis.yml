@@ -9,3 +9,15 @@ script:
   - docker run saadia45/docker-react npm run test -- --coverage
   - OR use the updated command below
   - docker run -e CI=true saadia45/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk - some predefined ones available in travisCI which includes instructions by default
+  region: "us-west-2" - region where the elasticbeanstalk instance got created
+  app: "docker" - name of the elasticbeanstalk app you created
+  env: "Docker-env" - name of the app running inside the AWS docker app referred to as environment
+  bucket_name: "elastcbeanstalk-us-west-2-19308558949" - name of the S3 bucket which is already generated when you generated the AWS app
+  bucket_path: "docker" - by default it is same folder name as the project app
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
